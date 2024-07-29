@@ -191,7 +191,7 @@ const webLinks = [
     url: "/wise",
     type: "support me",
     icon: "/wise.svg",
-    on: true,
+    on: false,
   },
   {
     title: "Momo",
