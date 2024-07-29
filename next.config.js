@@ -95,6 +95,12 @@ const nextConfig = {
             permanent: false,
           },
           {
+            // GitHub Sponsors
+            source: '/(github-sponsor|ghsponsors|ghs)',
+            destination: 'https://github.com/sponsors/jartf',
+            permanent: false,
+          },
+          {
             // Paypal
             source: '/(paypal|ppl|pp)',
             destination: 'https://paypal.me/jaremame',
