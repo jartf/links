@@ -166,6 +166,13 @@ const webLinks = [
     on: true,
   },
   {
+    title: "GitHub",
+    url: "/github-sponsor",
+    type: "support me",
+    icon: "/github.svg",
+    on: true,
+  },
+  {
     title: "Paypal",
     url: "/paypal",
     type: "support me",
