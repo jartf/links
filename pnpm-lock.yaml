@@ -59,7 +59,6 @@ importers:
         version: 3.3.3
 
 packages:
-
   '@babel/runtime@7.24.8':
     resolution: {integrity: sha512-5F7SDGs1T72ZczbRwbGO9lQi0NLjQxzl6i4lJxLxfW9U5UluCSyEJeniWvnhl3/euNiqQVbo8zruhsDfid0esA==}
     engines: {node: '>=6.9.0'}
@@ -1456,7 +1455,6 @@ packages:
         optional: true
 
 snapshots:
-
   '@babel/runtime@7.24.8':
     dependencies:
       regenerator-runtime: 0.14.1
