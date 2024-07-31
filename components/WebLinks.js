@@ -99,9 +99,9 @@ const Links = () => {
               <h1>{name}</h1>
               {/* if your remove username from data it will not appear */}
               {username ? (
-                <h3>
+                <h2>
                   <a href={`${url}`}>{username}</a>
-                </h3>
+                </h2>
               ) : (
                 ""
               )}
@@ -111,7 +111,7 @@ const Links = () => {
           {/* Bio Section */}
           <LinkBio>
             {description && <h1>{descriptionText} </h1>}
-            {subdesc && <h4>{subdescText}</h4>}
+            {subdesc && <h3>{subdescText}</h3>}
           </LinkBio>
           {/* End Bio Section */}
 
@@ -125,6 +125,7 @@ const Links = () => {
                     <a
                       href={i.url}
                       key={i.title}
+                      aria-label={i.title}
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -152,7 +153,7 @@ const Links = () => {
                     >
                       <LinkBox>
                         <LinkTitle>
-                          <img src={i.icon} style={{ filter: "var(--img)" }} />{" "}
+                          <img src={i.icon} alt={i.title} style={{ filter: "var(--img)" }} />{" "}
                           {i.title}
                         </LinkTitle>{" "}
                         <NewUp />
@@ -180,7 +181,7 @@ const Links = () => {
                     >
                       <LinkBox>
                         <LinkTitle>
-                          <img src={i.icon} style={{ filter: "var(--img)" }} />{" "}
+                          <img src={i.icon} alt={i.title} style={{ filter: "var(--img)" }} />{" "}
                           {i.title}
                         </LinkTitle>{" "}
                         <NewUp />
@@ -208,7 +209,7 @@ const Links = () => {
                     >
                       <LinkBox>
                         <LinkTitle>
-                          <img src={i.icon} style={{ filter: "var(--img)" }} />{" "}
+                          <img src={i.icon} alt="" style={{ filter: "var(--img)" }} />{" "}
                           {i.title}
                         </LinkTitle>{" "}
                         <NewUp />
@@ -243,6 +244,7 @@ const Links = () => {
                     <a
                       href={i.url}
                       key={i.title}
+                      aria-label={i.title}
                       target="_blank"
                       rel="noreferrer"
                     >
