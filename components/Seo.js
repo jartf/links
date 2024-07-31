@@ -7,7 +7,6 @@ export default function Seo({ page }) {
     <>
       <NextSeo
         title={title}
-        lang="en"
         titleTemplate={seoData.openGraph.title}
         defaultTitle={seoData.openGraph.title}
         description={seoData.openGraph.description}
