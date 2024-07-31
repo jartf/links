@@ -136,11 +136,12 @@ const Links = () => {
                     >
                       <LinkBox className="socialIcon">
                         <Image
-                          width={24}
-                          height={24}
+                          width={26}
+                          height={0}
                           src={i.icon}
                           alt={i.title}
-                          style={{ filter: "var(--img)" }}
+                          style={{ height: 'auto', filter: "var(--img)" }}
+                        // Thanks StackOverflow for the auto height suggestion lol
                         />
                       </LinkBox>
                     </a>
@@ -166,10 +167,10 @@ const Links = () => {
                         <LinkTitle>
                           <Image
                             width={20}
-                            height={20}
+                            height={0}
                             src={i.icon}
                             alt=""
-                            style={{ filter: "var(--img)" }}
+                            style={{ height: 'auto', filter: "var(--img)" }}
                           />
                           {" "}
                           {i.title}
@@ -201,10 +202,10 @@ const Links = () => {
                         <LinkTitle>
                           <Image
                             width={20}
-                            height={20}
+                            height={0}
                             src={i.icon}
                             alt=""
-                            style={{ filter: "var(--img)" }}
+                            style={{ height: 'auto', filter: "var(--img)" }}
                           />
                           {" "}
                           {i.title}
@@ -236,10 +237,10 @@ const Links = () => {
                         <LinkTitle>
                           <Image
                             width={20}
-                            height={20}
+                            height={0}
                             src={i.icon}
                             alt=""
-                            style={{ filter: "var(--img)" }}
+                            style={{ height: 'auto', filter: "var(--img)" }}
                           />
                           {" "}
                           {i.title}
@@ -283,10 +284,10 @@ const Links = () => {
                         <LinkTitle>
                           <Image
                             width={20}
-                            height={20}
+                            height={0}
                             src={i.icon}
                             alt=""
-                            style={{ filter: "var(--img)" }}
+                            style={{ height: 'auto', filter: "var(--img)" }}
                           />
                           {" "}
                           {i.title}
