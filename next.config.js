@@ -1,7 +1,8 @@
 const cspHeader = `
     default-src 'self';
-    script-src 'self' 'unsafe-eval' 'unsafe-inline';
-    style-src 'self' 'unsafe-eval' 'unsafe-inline' fonts.googleapis.com;
+    img-src 'self' data:;
+    script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app static.cloudflareinsights.com;
+    style-src 'self' 'unsafe-eval' 'unsafe-inline' fonts.googleapis.com giscus.app;
     frame-src 'self' giscus.app;
     font-src 'self' *.gstatic.com;
     media-src 'self' data:;
