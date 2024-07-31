@@ -1,6 +1,6 @@
 // Weblinks Page Sections
-// originally created by @realvjy, modified by @jarema to better fit my own
-// date: 29 Jul, 2024
+// originally created by @realvjy, modified by @jartf_ to better fit my site
+// date: 31 Jul, 2024
 
 import Image from "next/image";
 import styled from "styled-components";
@@ -97,11 +97,13 @@ const Links = () => {
                   <h1>{name}</h1>
                 )} */}
               <h1>{name}</h1>
-              {/* if your remove username from data it will not appear */}
+              {/* If you remove username from data, it will not appear */}
+              <h2></h2>
+              {/* Only adding because PageSpeed Insights won't stop complaining about incorrect order, like nO PLEASE, I intend it to be like this */}
               {username ? (
-                <h2>
+                <h3>
                   <a href={`${url}`}>{username}</a>
-                </h2>
+                </h3>
               ) : (
                 ""
               )}
@@ -129,7 +131,7 @@ const Links = () => {
                       rel="noreferrer"
                     >
                       <LinkBox className="socialIcon">
-                        <img src={i.icon} alt={i.title} style={{ filter: "var(--img)" }} />
+                        <img src={i.icon} alt={i.title} fill style={{ filter: "var(--img)" }} />
                       </LinkBox>
                     </a>
                   );
@@ -152,7 +154,7 @@ const Links = () => {
                     >
                       <LinkBox>
                         <LinkTitle>
-                          <img src={i.icon} alt="" style={{ filter: "var(--img)" }} />{" "}
+                          <img src={i.icon} alt="" fill style={{ filter: "var(--img)" }} />{" "}
                           {i.title}
                         </LinkTitle>{" "}
                         <NewUp />
@@ -180,7 +182,7 @@ const Links = () => {
                     >
                       <LinkBox>
                         <LinkTitle>
-                          <img src={i.icon} alt="" style={{ filter: "var(--img)" }} />{" "}
+                          <img src={i.icon} alt="" fill style={{ filter: "var(--img)" }} />{" "}
                           {i.title}
                         </LinkTitle>{" "}
                         <NewUp />
@@ -208,7 +210,7 @@ const Links = () => {
                     >
                       <LinkBox>
                         <LinkTitle>
-                          <img src={i.icon} alt="" style={{ filter: "var(--img)" }} />{" "}
+                          <img src={i.icon} alt="" fill style={{ filter: "var(--img)" }} />{" "}
                           {i.title}
                         </LinkTitle>{" "}
                         <NewUp />
@@ -248,7 +250,7 @@ const Links = () => {
                     >
                       <LinkBox>
                         <LinkTitle>
-                          <img alt="" src={i.icon} /> {i.title}
+                          <img alt="" fill src={i.icon} /> {i.title}
                         </LinkTitle>{" "}
                         <NewUp />
                       </LinkBox>
