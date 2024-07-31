@@ -47,7 +47,7 @@ const Links = () => {
   const newProduct = bioData[0].newProduct; // checking for newProduct flag true false
   const newProductUrl = bioData[0].newProductUrl; // get product url if available
 
-  // Collect all links filter by type - social, project, nft and other etc=
+  // Collect all links filter by type - social, project and other etc=
   // get data for social section
   const social = allLinks.filter((el) => {
     return el.type === "social" && el.on;
@@ -80,12 +80,16 @@ const Links = () => {
           <LinkHeader>
             <Avatar>
               <AvatarWrap>
-                {/* Avatar svg  hex or oval if nftAvatar=true will convert to hex */}
-                <HexIcon />
                 <OvalIcon />
                 <div className={`${avatarShape} avatar-border`}></div>
                 <div className={`${avatarShape} avatar-fill`}></div>
-                <img src={avatarImg} alt="My avatar" className={avatarShape} />
+                <Image
+                  src={avatarImg}
+                  alt="My avatar"
+                  height={90}
+                  width={90}
+                  className={avatarShape}
+                />
               </AvatarWrap>
             </Avatar>
             <Title>
@@ -131,7 +135,13 @@ const Links = () => {
                       rel="noreferrer"
                     >
                       <LinkBox className="socialIcon">
-                        <img src={i.icon} alt={i.title} fill style={{ filter: "var(--img)" }} />
+                        <Image
+                          width={24}
+                          height={24}
+                          src={i.icon}
+                          alt={i.title}
+                          style={{ filter: "var(--img)" }}
+                        />
                       </LinkBox>
                     </a>
                   );
@@ -154,7 +164,14 @@ const Links = () => {
                     >
                       <LinkBox>
                         <LinkTitle>
-                          <img src={i.icon} alt="" fill style={{ filter: "var(--img)" }} />{" "}
+                          <Image
+                            width={20}
+                            height={20}
+                            src={i.icon}
+                            alt=""
+                            style={{ filter: "var(--img)" }}
+                          />
+                          {" "}
                           {i.title}
                         </LinkTitle>{" "}
                         <NewUp />
@@ -182,7 +199,14 @@ const Links = () => {
                     >
                       <LinkBox>
                         <LinkTitle>
-                          <img src={i.icon} alt="" fill style={{ filter: "var(--img)" }} />{" "}
+                          <Image
+                            width={20}
+                            height={20}
+                            src={i.icon}
+                            alt=""
+                            style={{ filter: "var(--img)" }}
+                          />
+                          {" "}
                           {i.title}
                         </LinkTitle>{" "}
                         <NewUp />
@@ -210,7 +234,14 @@ const Links = () => {
                     >
                       <LinkBox>
                         <LinkTitle>
-                          <img src={i.icon} alt="" fill style={{ filter: "var(--img)" }} />{" "}
+                          <Image
+                            width={20}
+                            height={20}
+                            src={i.icon}
+                            alt=""
+                            style={{ filter: "var(--img)" }}
+                          />
+                          {" "}
                           {i.title}
                         </LinkTitle>{" "}
                         <NewUp />
@@ -250,7 +281,15 @@ const Links = () => {
                     >
                       <LinkBox>
                         <LinkTitle>
-                          <img alt="" fill src={i.icon} /> {i.title}
+                          <Image
+                            width={20}
+                            height={20}
+                            src={i.icon}
+                            alt=""
+                            style={{ filter: "var(--img)" }}
+                          />
+                          {" "}
+                          {i.title}
                         </LinkTitle>{" "}
                         <NewUp />
                       </LinkBox>
