@@ -85,7 +85,7 @@ const Links = () => {
                 <OvalIcon />
                 <div className={`${avatarShape} avatar-border`}></div>
                 <div className={`${avatarShape} avatar-fill`}></div>
-                <img src={avatarImg} className={avatarShape} />
+                <img src={avatarImg} alt="My avatar" className={avatarShape} />
               </AvatarWrap>
             </Avatar>
             <Title>
@@ -110,8 +110,8 @@ const Links = () => {
 
           {/* Bio Section */}
           <LinkBio>
-            {description && <h1>{descriptionText} </h1>}
-            {subdesc && <h3>{subdescText}</h3>}
+            {description && <h3>{descriptionText} </h3>}
+            {subdesc && <h4>{subdescText}</h4>}
           </LinkBio>
           {/* End Bio Section */}
 
@@ -125,12 +125,11 @@ const Links = () => {
                     <a
                       href={i.url}
                       key={i.title}
-                      aria-label={i.title}
                       target="_blank"
                       rel="noreferrer"
                     >
                       <LinkBox className="socialIcon">
-                        <img src={i.icon} style={{ filter: "var(--img)" }} />
+                        <img src={i.icon} alt={i.title} style={{ filter: "var(--img)" }} />
                       </LinkBox>
                     </a>
                   );
@@ -181,7 +180,7 @@ const Links = () => {
                     >
                       <LinkBox>
                         <LinkTitle>
-                          <img src={i.icon} alt={i.title} style={{ filter: "var(--img)" }} />{" "}
+                          <img src={i.icon} alt="" style={{ filter: "var(--img)" }} />{" "}
                           {i.title}
                         </LinkTitle>{" "}
                         <NewUp />
@@ -244,7 +243,7 @@ const Links = () => {
                     <a
                       href={i.url}
                       key={i.title}
-                      aria-label={i.title}
+                      alt=""
                       target="_blank"
                       rel="noreferrer"
                     >
