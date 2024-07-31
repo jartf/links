@@ -152,7 +152,7 @@ const Links = () => {
                     >
                       <LinkBox>
                         <LinkTitle>
-                          <img src={i.icon} alt={i.title} style={{ filter: "var(--img)" }} />{" "}
+                          <img src={i.icon} alt="" style={{ filter: "var(--img)" }} />{" "}
                           {i.title}
                         </LinkTitle>{" "}
                         <NewUp />
@@ -243,13 +243,12 @@ const Links = () => {
                     <a
                       href={i.url}
                       key={i.title}
-                      alt=""
                       target="_blank"
                       rel="noreferrer"
                     >
                       <LinkBox>
                         <LinkTitle>
-                          <img src={i.icon} /> {i.title}
+                          <img alt="" src={i.icon} /> {i.title}
                         </LinkTitle>{" "}
                         <NewUp />
                       </LinkBox>
