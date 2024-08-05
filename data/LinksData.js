@@ -1,4 +1,4 @@
-// date 31 Jul, 2024
+// Last updated: 5 Aug, 2024
 const webLinks = [
   // All social profile
   {
@@ -114,6 +114,13 @@ const webLinks = [
     icon: "/moon.svg",
     on: true,
   },
+  {
+    title: "Book a meeting with me",
+    url: "cal.com/jaremaa",
+    type: "web",
+    icon: "/meeting.svg",
+    on: true
+  }
   {
     title: "See my pronouns",
     url: "/prn",
