@@ -116,11 +116,11 @@ const webLinks = [
   },
   {
     title: "Book a meeting with me",
-    url: "cal.com/jaremaa",
+    url: "/meeting",
     type: "web",
     icon: "/meeting.svg",
     on: true
-  }
+  },
   {
     title: "See my pronouns",
     url: "/prn",
