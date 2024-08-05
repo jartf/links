@@ -1,4 +1,4 @@
-// date 31 Jul, 2024
+// Last updated: 5 Aug, 2024
 const webLinks = [
   // All social profile
   {
@@ -113,6 +113,13 @@ const webLinks = [
     type: "web",
     icon: "/moon.svg",
     on: true,
+  },
+  {
+    title: "Book a meeting with me",
+    url: "/meeting",
+    type: "web",
+    icon: "/meeting.svg",
+    on: true
   },
   {
     title: "See my pronouns",

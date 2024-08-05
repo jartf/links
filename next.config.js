@@ -128,6 +128,12 @@ const nextConfig = {
         permanent: false,
       },
       {
+        // Meeting
+        source: '/(meeting|calcom|cal|mt)',
+        destination: 'https://cal.com/jaremaa',
+        permanent: false,
+      },
+      {
         // Mail (working on a better method)
         source: '/(mail|m)',
         destination: 'https://jarema.me/contact',
