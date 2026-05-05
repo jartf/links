@@ -3,7 +3,7 @@ const webLinks = [
   // All social profile
   {
     title: "Email",
-    url: "/m",
+    url: "mailto:hi@jar.tf",
     type: "top",
     icon: "/email.svg",
     on: true,
