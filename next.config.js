@@ -1,13 +1,12 @@
 const cspHeader = `
-    default-src 'self';
-    img-src 'self' data:;
-    script-src 'self' giscus.app static.cloudflareinsights.com;
-    style-src 'self' 'unsafe-eval' 'unsafe-inline' fonts.googleapis.com giscus.app;
-    frame-src 'self' giscus.app;
+    default-src 'none';
+    connect-src 'self' api-gateway.umami.dev cloud.umami.is;
+    img-src 'self';
+    script-src 'self' 'sha256-RlhVC6WGhVrcsY0hAmbU/YhaSUz2iA2q1f16/7A6jLU=' 'sha256-yei5Fza+Eyx4G0smvN0xBqEesIKumz6RSyGsU3FJowI=' 'sha256-Khy5wTpWZsECYkatTfjUzkzDmKI3jdRjRX+5yTts5sM=';
+    style-src 'self' 'unsafe-inline' fonts.googleapis.com;
     font-src 'self' *.gstatic.com;
-    media-src 'self' data:;
+    media-src 'self';
     base-uri 'self';
-    frame-ancestors 'self' giscus.app;
     upgrade-insecure-requests;
 `
 
@@ -16,7 +15,6 @@ const nextConfig = {
   async headers() {
     return [
       {
-        // CORS headers for API routes
         source: "/api/:path*",
         headers: [
           {
@@ -36,33 +34,34 @@ const nextConfig = {
       {
         source: '/:path*',
         headers: [
-          // Prefetch control
           {
             key: 'X-DNS-Prefetch-Control',
             value: 'on',
           },
-          // Security headers
           {
             key: 'Referrer-Policy',
             value: 'strict-origin'
           },
           {
             key: 'X-Frame-Options',
-            value: 'SAMEORIGIN'
+            value: 'DENY'
           },
           {
             key: 'X-Content-Type-Options',
             value: 'nosniff'
           },
           {
+            key: 'X-Xss-Protection',
+            value: '0'
+          },
+          {
             key: 'Permissions-Policy',
-            value: 'browsing-topics=()'
+            value: 'interest-cohort=(), browsing-topics=(), camera=(), microphone=(), geolocation=(), usb=()'
           },
           {
             key: 'Content-Security-Policy',
             value: cspHeader.replace(/\n/g, ''),
           },
-          // Cross origin headers
           {
             key: 'Cross-Origin-Embedder-Policy',
             value: 'require-corp'
@@ -75,10 +74,17 @@ const nextConfig = {
             key: 'Cross-Origin-Resource-Policy',
             value: 'same-site'
           },
-          // Global Privacy Control
           {
             key: 'Sec-GPC',
             value: '1'
+          },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=31536000; includeSubDomains'
+          },
+          {
+            key: 'Server',
+            value: 'Jarema'
           },
         ],
       },
@@ -87,17 +93,7 @@ const nextConfig = {
 
   reactStrictMode: true,
   compiler: {
-    // ssr and displayName are configured by default
     styledComponents: true,
-  },
-  async rewrites() {
-    return [
-      {
-        // rewrite links url as base
-        source: '/(links|lnk|l)',
-        destination: '/',
-      },
-    ]
   },
   async redirects() {
     return [
@@ -106,6 +102,12 @@ const nextConfig = {
         // Main
         source: '/(w|main|web|site|website)',
         destination: 'https://jarema.me',
+        permanent: false,
+      },
+      {
+        // About
+        source: '/(about|a)',
+        destination: 'https://jarema.me/blog',
         permanent: false,
       },
       {
@@ -127,45 +129,57 @@ const nextConfig = {
         permanent: false,
       },
       {
+        // Guestbook
+        source: '/(guestbook|guest|g)',
+        destination: 'https://jarema.me/guestbook',
+        permanent: false,
+      },
+      {
+        // Brand kit
+        source: '/(brand|kit|k)',
+        destination: 'https://jarema.me/brand',
+        permanent: false,
+      },
+      {
         // Meeting
-        source: '/(meeting|calcom|cal|mt)',
+        source: '/(meeting|calcom|cal|meet|mt)',
         destination: 'https://cal.com/jaremaa',
         permanent: false,
       },
       {
-        // Mail (working on a better method)
+        // Mail
         source: '/(mail|m)',
-        destination: 'https://jarema.me/contact',
+        destination: 'mailto:hi@jar.tf',
         permanent: false,
       },
       {
-        // Pronouns.page
-        source: '/(pronouns|prn)',
-        destination: 'https://pronouns.page/@jerryv',
+        // Now
+        source: '/(now|n)',
+        destination: 'https://jarema.me/now',
+        permanent: false,
+      },
+      {
+        // Uses
+        source: '/(uses|u)',
+        destination: 'https://jarema.me/uses',
         permanent: false,
       },
 
       // Tools section
       {
-        // Nextcloud
-        source: '/cloud',
-        destination: 'https://cloud.jarema.me',
-        permanent: false,
-      },
-      {
-        // VSCode Web
-        source: '/code',
-        destination: 'https://code.jarema.me/',
+        // Tools page
+        source: '/(tools|t)',
+        destination: 'https://jarema.me/tools',
         permanent: false,
       },
       {
         // Vaultwarden
         source: '/(vaultwarden|vw)',
-        destination: 'https://vw.jarema.me/',
+        destination: 'https://vault.jarema.me/',
         permanent: false,
       },
       {
-        // Docus
+        // Docs
         source: '/docs',
         destination: 'https://docs.jarema.me/',
         permanent: false,
@@ -174,50 +188,6 @@ const nextConfig = {
         // Chris's tools
         source: '/win',
         destination: 'https://win.jarema.me/',
-        permanent: false,
-      },
-
-      // Support section
-      {
-        // Ko-fi
-        source: '/(kofi|ko-fi|kf)',
-        destination: 'https://ko-fi.com/jarema',
-        permanent: false,
-      },
-      {
-        // GitHub Sponsors
-        source: '/(github-sponsor|ghsponsors|ghs)',
-        destination: 'https://github.com/sponsors/jartf',
-        permanent: false,
-      },
-      {
-        // Paypal
-        source: '/(paypal|ppl|pp)',
-        destination: 'https://paypal.me/jaremame',
-        permanent: false,
-      },
-      {
-        // Wise
-        source: '/wise',
-        destination: 'https://wise.com/pay/me/vietanhv4',
-        permanent: false,
-      },
-      {
-        // MoMo
-        source: '/(momo|mmvn|mm)',
-        destination: 'https://me.momo.vn/vietanh',
-        permanent: false,
-      },
-      {
-        // Patreon
-        source: '/(patreon|patron|pt)',
-        destination: 'https://www.patreon.com/jartf',
-        permanent: false,
-      },
-      {
-        // Liberapay
-        source: '/(liberapay|libera|libpay)',
-        destination: 'https://liberapay.com/jarema',
         permanent: false,
       },
 
@@ -230,26 +200,26 @@ const nextConfig = {
       },
       {
         // Mastodon
-        source: '/(mastodon|masto|tootio|toot)',
-        destination: 'https://toot.io/@jar',
+        source: '/(mastodon|masto|tootio|toot|ms)',
+        destination: 'https://blob.cat/jar',
         permanent: false,
       },
       {
         // Telegram
         source: '/(telegram|tele|tme|tg)',
-        destination: 'https://t.me/jarema_me',
+        destination: 'https://t.me/jaremame',
         permanent: false,
       },
       {
         // Signal
-        source: '/(signal|sig|sn)',
-        destination: 'https://signal.me/#eu/lTzwFNSwyplWc4hG7LQxSByIgXxGxkcoHCfTs5oK_i8PmVNMGhxFgaAD8qjgb-TE',
+        source: '/(signal|sgnl|sig|sn)',
+        destination: 'https://signal.me/#eu/wHpqXqMSQ6LSg0zijVcCCWm5PK5gwshaDFOAg0aj-aq5BSs94E9CLJ5ThNuy4t6A',
         permanent: false,
       },
       {
-        // Threads
-        source: '/(threads|threadsnet)',
-        destination: 'https://threads.net/@jarema.says',
+        // Codeberg
+        source: '/(codeberg|cd)',
+        destination: 'https://github.com/jartf',
         permanent: false,
       },
       {
@@ -260,50 +230,26 @@ const nextConfig = {
       },
       {
         // GitLab
-        source: '/(gitlab|glab)',
+        source: '/(gitlab|gl)',
         destination: 'https://gitlab.com/jartf',
         permanent: false,
       },
       {
-        // Instagram
-        source: '/(instagram|insta|ig)',
-        destination: 'https://instagram.com/jarema.says',
-        permanent: false,
-      },
-      {
-        // LinkedIn
-        source: '/(linkedin|lnkin|in)',
-        destination: 'https://www.linkedin.com/in/vietanhv/',
-        permanent: false,
-      },
-      {
-        // Zalo
-        source: '/(zalo|zl)',
-        destination: 'https://zalo.me/',
-        permanent: false,
-      },
-      {
         // Bluesky
-        source: '/(bluesky|bsky)',
-        destination: 'https://bsky.app/profile/jartf.bsky.social',
-        permanent: false,
-      },
-      {
-        // Google Developer
-        source: '/gdev',
-        destination: 'https://g.dev/jarema',
+        source: '/(bluesky|bsky|bl)',
+        destination: 'https://bsky.app/profile/jarema.me',
         permanent: false,
       },
       {
         // IndieWeb
-        source: '/indieweb',
+        source: '/(indieweb|iw)',
         destination: 'https://indieweb.org/User:Jarema.me',
         permanent: false,
       },
       {
-        // OpenStreetMap
-        source: '/(openstreetmap|osm)',
-        destination: 'https://openstreetmap.org/user/Equate',
+        // Pronouns.page
+        source: '/(pronouns|prn|pp)',
+        destination: 'https://pronouns.page/@jerryv',
         permanent: false,
       },
     ]
