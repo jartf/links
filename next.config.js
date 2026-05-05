@@ -193,9 +193,15 @@ const nextConfig = {
 
       // Social links
       {
+        // Matrix
+        source: '/(matrix|mx)',
+        destination: 'https://matrix.to/#/@jar1:tchncs.de',
+        permanent: false,
+      },
+      {
         // Twitter
-        source: '/(twitter|tweet|twt|tw|x)',
-        destination: 'https://twitter.com/jartf_',
+        source: '/(twitter|tweet|twt|tw)',
+        destination: 'https://twitter.com/jarema_me',
         permanent: false,
       },
       {
@@ -214,6 +220,12 @@ const nextConfig = {
         // Signal
         source: '/(signal|sgnl|sig|sn)',
         destination: 'https://signal.me/#eu/wHpqXqMSQ6LSg0zijVcCCWm5PK5gwshaDFOAg0aj-aq5BSs94E9CLJ5ThNuy4t6A',
+        permanent: false,
+      },
+      {
+        // Discord
+        source: '/(discord|dis|ds)',
+        destination: 'https://discord.com/users/444078929314185217',
         permanent: false,
       },
       {
