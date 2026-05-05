@@ -6,7 +6,7 @@ import Layout from "../components/Layout";
 import GlobalStyle from "../styles/GlobalStyle";
 import { darkTheme, lightTheme } from "../styles/theme.config";
 import { GoogleAnalytics } from "nextjs-google-analytics";
-import { DefaultSeo } from 'next-seo';
+import { ArticleJsonLd } from 'next-seo';
 import SEO from '../next-seo.config';
 
 function MyApp({ Component, pageProps }) {
@@ -31,7 +31,7 @@ function MyApp({ Component, pageProps }) {
                 </Head>
                 <GlobalStyle />
                 <Layout>
-                    <DefaultSeo
+                    <ArticleJsonLd
                         canonical={SEO.openGraph.url}
                         {...SEO}
                         additionalMetaTags={[{

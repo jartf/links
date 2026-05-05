@@ -86,12 +86,11 @@ const nextConfig = {
   },
 
   reactStrictMode: true,
-  swcMinify: true,
   compiler: {
     // ssr and displayName are configured by default
     styledComponents: true,
   },
-  optimizeFonts: false, async rewrites() {
+  async rewrites() {
     return [
       {
         // rewrite links url as base

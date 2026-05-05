@@ -1,11 +1,11 @@
-import { NextSeo } from 'next-seo';
+import { ArticleJsonLd } from 'next-seo';
 import seoData from '../next-seo.config';
 
 export default function Seo({ page }) {
   const { title, excerpt, slug, coverImage } = page;
   return (
     <>
-      <NextSeo
+      <ArticleJsonLd
         title={title}
         titleTemplate={seoData.openGraph.title}
         defaultTitle={seoData.openGraph.title}
