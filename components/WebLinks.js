@@ -5,12 +5,7 @@
 import Image from "next/image";
 import styled from "styled-components";
 import { Button, ButtonLink, Container, StyledLink } from "./ReusableStyles";
-import Link from "next/link";
 import {
-  ChevronRightIcon,
-  HexIcon,
-  HomeIcon,
-  TwitterIcon,
   NewUp,
   OvalIcon,
 } from "./icons";
@@ -22,7 +17,6 @@ const Links = () => {
   const name = bioData[0].name;
   const url = bioData[0].url;
   const username = bioData[0].username;
-  const titleImg = bioData[0].titleImg;
   const avatarImg = bioData[0].avatar;
   const description = bioData[0].description;
   const descShow = bioData[0].descShow;
@@ -31,10 +25,7 @@ const Links = () => {
   const footerText = bioData[0].footerText;
   const author = bioData[0].author;
   const authorURL = bioData[0].authorURL;
-  const titleImage = "/title.svg";
-
-  // Check what class to use oval or hex for avatar
-  const avatarShape = bioData[0].nftAvatar ? `nft-clipped` : `oval-clipped`;
+  const avatarShape = `oval-clipped`;
 
   // Description and subdescription goes here
   const descriptionText = descShow
@@ -48,9 +39,9 @@ const Links = () => {
   const newProductUrl = bioData[0].newProductUrl; // get product url if available
 
   // Collect all links filter by type - social, project and other etc=
-  // get data for social section
-  const social = allLinks.filter((el) => {
-    return el.type === "social" && el.on;
+  // get data for top bar
+  const top = allLinks.filter((el) => {
+    return el.type === "top" && el.on;
   });
 
   // Get data for web section
@@ -63,9 +54,9 @@ const Links = () => {
     return el.type === "tools for friends" && el.on;
   });
 
-  // Get data for support section
-  const support = allLinks.filter((el) => {
-    return el.type === "support me" && el.on;
+  // Get data for social section
+  const social = allLinks.filter((el) => {
+    return el.type === "social" && el.on;
   });
 
   // Get data for other section
@@ -124,9 +115,9 @@ const Links = () => {
           {/* Weblinks started */}
           <WebLinkWrap>
             {/* Social Icon */}
-            <LinkSection className="social">
+            <LinkSection className="top">
               <div className="iconsonly">
-                {social.map((i) => {
+                {top.map((i) => {
                   return (
                     <a
                       href={i.url}
@@ -221,11 +212,11 @@ const Links = () => {
             )}
             {/* End Tools Section */}
 
-            {/* Support Section */}
-            {support.length > 0 ? (
+            {/* Social Section */}
+            {social.length > 0 ? (
               <LinkSection>
-                <h3>{support[0].type}</h3>
-                {support.map((i) => {
+                <h3>{social[0].type}</h3>
+                {social.map((i) => {
                   return (
                     <a
                       href={i.url}
@@ -254,7 +245,7 @@ const Links = () => {
             ) : (
               ""
             )}
-            {/* End Support Section */}
+            {/* End Social Section */}
 
             {/* Other Section */}
             {others.length > 0 ? (
