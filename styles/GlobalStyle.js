@@ -1,12 +1,12 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
-body.dark-mode {
+html.dark {
   --img: invert(1);
   --avatar-shadow: rgba(28,22,47,.3);
 }
 
-body.light-mode {
+html.light {
   --img: invert(0);
   --avatar-shadow: rgba(48,52,77,.1);
 } 

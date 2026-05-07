@@ -7,6 +7,7 @@ const webLinks = [
     type: "top",
     icon: "/email.svg",
     on: true,
+    noInvert: false,
   },
   {
     title: "Signal",
@@ -14,6 +15,7 @@ const webLinks = [
     type: "top",
     icon: "/signal.svg",
     on: true,
+    noInvert: false,
   },
   {
     title: "Mastodon",
@@ -21,6 +23,7 @@ const webLinks = [
     type: "top",
     icon: "/mastodon.svg",
     on: true,
+    noInvert: false,
   },
   // Links section
   {
@@ -29,6 +32,7 @@ const webLinks = [
     type: "web",
     icon: "/web.svg",
     on: true,
+    noInvert: false,
   },
   {
     title: "Read my blog",
@@ -36,6 +40,7 @@ const webLinks = [
     type: "web",
     icon: "/blog.svg",
     on: true,
+    noInvert: false,
   },
   {
     title: "Contact me",
@@ -43,13 +48,15 @@ const webLinks = [
     type: "web",
     icon: "/moon.svg",
     on: true,
+    noInvert: false,
   },
   {
     title: "Book a meeting with me",
     url: "/mt",
     type: "web",
     icon: "/meeting.svg",
-    on: true
+    on: true,
+    noInvert: false,
   },
   // Friends' tools section
   {
@@ -58,6 +65,7 @@ const webLinks = [
     type: "tools for friends",
     icon: "/nextcloud.svg",
     on: true,
+    noInvert: false,
   },
   {
     title: "Vaultwarden",
@@ -65,6 +73,7 @@ const webLinks = [
     type: "tools for friends",
     icon: "/showtime.svg",
     on: true,
+    noInvert: false,
   },
   {
     title: "Docs",
@@ -72,6 +81,7 @@ const webLinks = [
     type: "tools for friends",
     icon: "/doc.png",
     on: true,
+    noInvert: false,
   },
   {
     title: "Chris Titus Tech's tools",
@@ -79,6 +89,7 @@ const webLinks = [
     type: "tools for friends",
     icon: "/windows.svg",
     on: true,
+    noInvert: false,
   },
   // Social media section
   {
@@ -87,6 +98,7 @@ const webLinks = [
     type: "social",
     icon: "/github.svg",
     on: true,
+    noInvert: false,
   },
   {
     title: "Github",
@@ -94,6 +106,7 @@ const webLinks = [
     type: "social",
     icon: "/github.svg",
     on: true,
+    noInvert: false,
   },
   {
     title: "GitLab",
@@ -101,6 +114,7 @@ const webLinks = [
     type: "social",
     icon: "/github.svg",
     on: true,
+    noInvert: false,
   },
   {
     title: "Twitter",
@@ -108,6 +122,7 @@ const webLinks = [
     type: "social",
     icon: "/twitter.svg",
     on: true,
+    noInvert: false,
   },
   {
     title: "Telegram",
@@ -115,6 +130,7 @@ const webLinks = [
     type: "social",
     icon: "/telegram.svg",
     on: true,
+    noInvert: false,
   },
   {
     title: "Pronouns.page",
@@ -122,6 +138,7 @@ const webLinks = [
     type: "social",
     icon: "/pronounspage.svg",
     on: true,
+    noInvert: false,
   },
   // Other section
   {
@@ -130,6 +147,7 @@ const webLinks = [
     type: "other",
     icon: "/avatar.svg",
     on: true,
+    noInvert: true,
   },
 ];
 

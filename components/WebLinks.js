@@ -131,7 +131,7 @@ const Links = () => {
                           height={0}
                           src={i.icon}
                           alt={i.title}
-                          style={{ height: 'auto', filter: "var(--img)" }}
+                          style={{ height: 'auto', filter: i.noInvert ? "none" : "var(--img)" }}
                         // Thanks StackOverflow for the auto height suggestion lol
                         />
                       </LinkBox>
@@ -161,7 +161,7 @@ const Links = () => {
                             height={0}
                             src={i.icon}
                             alt=""
-                            style={{ height: 'auto', filter: "var(--img)" }}
+                            style={{ height: 'auto', filter: i.noInvert ? "none" : "var(--img)" }}
                           />
                           {" "}
                           {i.title}
@@ -196,7 +196,7 @@ const Links = () => {
                             height={0}
                             src={i.icon}
                             alt=""
-                            style={{ height: 'auto', filter: "var(--img)" }}
+                            style={{ height: 'auto', filter: i.noInvert ? "none" : "var(--img)" }}
                           />
                           {" "}
                           {i.title}
@@ -231,7 +231,7 @@ const Links = () => {
                             height={0}
                             src={i.icon}
                             alt=""
-                            style={{ height: 'auto', filter: "var(--img)" }}
+                            style={{ height: 'auto', filter: i.noInvert ? "none" : "var(--img)" }}
                           />
                           {" "}
                           {i.title}
@@ -278,7 +278,7 @@ const Links = () => {
                             height={0}
                             src={i.icon}
                             alt=""
-                            style={{ height: 'auto', filter: "var(--img)" }}
+                            style={{ height: 'auto', filter: i.noInvert ? "none" : "var(--img)" }}
                           />
                           {" "}
                           {i.title}
