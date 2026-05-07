@@ -96,7 +96,29 @@ a{
   transform: translate(-50%, -50%);
 }
 
-   
+.theme-icon--sun  { display: none; }
+.theme-icon--moon { display: block; }
+
+@media (prefers-color-scheme: dark) {
+  .theme-icon--sun  { display: block; }
+  .theme-icon--moon { display: none; }
+}
+
+html.light .theme-icon--sun  { display: none; }
+html.light .theme-icon--moon { display: block; }
+html.dark  .theme-icon--sun  { display: block; }
+html.dark  .theme-icon--moon { display: none; }
+
+.theme-icon {
+  filter: invert(0);
+}
+@media (prefers-color-scheme: dark) {
+  .theme-icon { filter: invert(1); }
+}
+html.light .theme-icon { filter: invert(0); }
+html.dark  .theme-icon { filter: invert(1); }
+
+
 `;
 
 export default GlobalStyle;
