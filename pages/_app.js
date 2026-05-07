@@ -5,8 +5,7 @@ import { ThemeProvider } from "styled-components";
 import Layout from "../components/Layout";
 import GlobalStyle from "../styles/GlobalStyle";
 import { darkTheme, lightTheme } from "../styles/theme.config";
-import { GoogleAnalytics } from "@next/third-parties/google";
-import SEO from '../next-seo.config';
+
 
 function ThemedApp({ Component, pageProps, isMounted }) {
     const { resolvedTheme } = useTheme()
@@ -31,8 +30,7 @@ function MyApp({ Component, pageProps }) {
 
     return (
         <>
-            <GoogleAnalytics gaId={SEO.gaId ?? ""} />
-            <NextThemesProvider defaultTheme="light">
+            <NextThemesProvider defaultTheme="system" attribute="class" enableSystem>
                 <Head>
                     <meta content="width=device-width, initial-scale=1" name="viewport" />
                     <link rel="icon" href="/favicon.ico" />
