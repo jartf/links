@@ -13,7 +13,7 @@
   "dependencies": {
     "@react-three/fiber": "^9.6.1",
     "@tsparticles/react": "^3.0.0",
-    "next": "^16.2.4",
+    "next": "^16.2.5",
     "next-seo": "^7.2.0",
     "nextjs-google-analytics": "^2.3.7",
     "react": "^19.2.5",
