@@ -1,20 +1,29 @@
 import { useState, useEffect } from "react"
-import useDarkMode from "use-dark-mode"
+import { ThemeProvider as NextThemesProvider, useTheme } from "next-themes"
 import Head from "next/head";
 import { ThemeProvider } from "styled-components";
 import Layout from "../components/Layout";
 import GlobalStyle from "../styles/GlobalStyle";
 import { darkTheme, lightTheme } from "../styles/theme.config";
-import { GoogleAnalytics } from "nextjs-google-analytics";
-import { ArticleJsonLd } from 'next-seo';
+import { GoogleAnalytics } from "@next/third-parties/google";
 import SEO from '../next-seo.config';
 
-function MyApp({ Component, pageProps }) {
-    const darkMode = useDarkMode(false, { storageKey: null, onChange: null })
-    const [isMounted, setIsMounted] = useState(false)
+function ThemedApp({ Component, pageProps, isMounted }) {
+    const { resolvedTheme } = useTheme()
+    const theme = resolvedTheme === "dark" ? darkTheme : lightTheme;
 
-    // const [theme, setTheme] = useState(lightTheme)
-    const theme = darkMode.value ? darkTheme : lightTheme;
+    return (
+        <ThemeProvider theme={theme}>
+            <GlobalStyle />
+            <Layout>
+                {isMounted && <Component {...pageProps} />}
+            </Layout>
+        </ThemeProvider>
+    )
+}
+
+function MyApp({ Component, pageProps }) {
+    const [isMounted, setIsMounted] = useState(false)
 
     useEffect(() => {
         setIsMounted(true);
@@ -22,44 +31,15 @@ function MyApp({ Component, pageProps }) {
 
     return (
         <>
-            <GoogleAnalytics />
-            <ThemeProvider theme={theme}>
+            <GoogleAnalytics gaId={SEO.gaId ?? ""} />
+            <NextThemesProvider defaultTheme="light">
                 <Head>
                     <meta content="width=device-width, initial-scale=1" name="viewport" />
                     <link rel="icon" href="/favicon.ico" />
-
                 </Head>
-                <GlobalStyle />
-                <Layout>
-                    <ArticleJsonLd
-                        canonical={SEO.openGraph.url}
-                        {...SEO}
-                        additionalMetaTags={[{
-                            name: 'keywords',
-                            content: SEO.openGraph.keywords,
-                        },
-                        {
-                            name: 'twitter:image',
-                            content: SEO.openGraph.images[0].url
-                        },
-                        {
-                            name: 'twitter:title',
-                            content: SEO.openGraph.title,
-                        },
-                        {
-                            name: 'twitter:description',
-                            content: SEO.openGraph.description,
-                        },
-                        {
-                            httpEquiv: 'x-ua-compatible',
-                            content: 'IE=edge; chrome=1'
-                        }]}
-                    />
-                    {isMounted && <Component {...pageProps} />}
-                </Layout>
-            </ThemeProvider>
+                <ThemedApp Component={Component} pageProps={pageProps} isMounted={isMounted} />
+            </NextThemesProvider>
         </>
-
     )
 }
 export default MyApp
