@@ -19,9 +19,17 @@
     "react-dom": "^19.2.6",
     "styled-components": "^6.4.1"
   },
+  "overrides": {
+    "postcss": ">=8.5.10"
+  },
   "devDependencies": {
     "eslint": "^10.3.0",
     "eslint-config-next": "^16.2.6",
     "prettier": "^3.8.3"
+  },
+  "pnpm": {
+    "overrides": {
+      "postcss": ">=8.5.10"
+    }
   }
 }
