@@ -8,20 +8,16 @@
 
 import Head from 'next/head';
 
-// Scrape <meta> tag
-function scrapeMeta(html, ...attrs) {
-  for (const attr of attrs) {
-    const m = html.match(
-      new RegExp(`<meta[^>]+${attr}[^>]*content=["']([^"']+)["']`, 'i') ||
-      new RegExp(`<meta[^>]+content=["']([^"']+)["'][^>]+${attr}`, 'i')
-    );
-    if (m?.[1]) return m[1];
-
-    // Reversed attribute order
-    const m2 = html.match(
-      new RegExp(`<meta[^>]+content=["']([^"']+)["'][^>]+${attr}`, 'i')
-    );
-    if (m2?.[1]) return m2[1];
+// Scrape <meta property|name="PROP" content="..."> tag
+function scrapeMeta(html, property) {
+  const tagRe = /<meta\s[^>]+>/gi;
+  let tag;
+  while ((tag = tagRe.exec(html)) !== null) {
+    const t = tag[0];
+    if (new RegExp(`(?:property|name)=["']${property}["']`, 'i').test(t)) {
+      const cm = t.match(/content="([^"]*)"/i) || t.match(/content='([^']*)'/i);
+      if (cm) return cm[1];
+    }
   }
   return null;
 }
@@ -62,7 +58,7 @@ export async function getServerSideProps({ params }) {
       const head = text.slice(0, text.toLowerCase().indexOf('</head>') + 7);
 
       og.title = scrapeMeta(head, 'og:title') ?? scrapeMeta(head, 'twitter:title');
-      og.description = scrapeMeta(head, 'og:description') ?? scrapeMeta(head, 'twitter:description') ?? scrapeMeta(head, 'name="description"');
+      og.description = scrapeMeta(head, 'og:description') ?? scrapeMeta(head, 'twitter:description') ?? scrapeMeta(head, 'description');
       og.image = scrapeMeta(head, 'og:image') ?? scrapeMeta(head, 'twitter:image');
     }
   } catch { }
@@ -71,7 +67,7 @@ export async function getServerSideProps({ params }) {
 }
 
 export default function BlogShortlink({ destination, og }) {
-  const title = og.title ?? 'jarema.me — blog';
+  const title = og.title ?? 'jarema.me blog';
   const description = og.description ?? '';
   const image = og.image ?? 'https://jarema.me/favicon.png';
 
