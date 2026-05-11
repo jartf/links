@@ -118,7 +118,7 @@ const nextConfig = {
       },
       {
         // Blog entry perm redirect
-        source: '/(blog|b)/:slug*',
+        source: '/(blog)/:slug*',
         destination: 'https://jarema.me/blog/:slug*',
         permanent: true,
       },
