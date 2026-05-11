@@ -1,5 +1,6 @@
 // Handles /b/* blog permashortlinks
 // Formats:
+//   /b/YYMMDD    -> https://jarema.me/blog/20YY/MM/DD/
 //   /b/YYMM/slug -> https://jarema.me/blog/20YY/MM/slug/
 //   /b/slug      -> https://jarema.me/blog/slug/
 
@@ -9,7 +10,19 @@ export function proxy(request) {
   const { pathname } = request.nextUrl;
   const parts = pathname.slice(3).split('/').filter(Boolean);
   let destination;
-  if (parts.length === 2 && /^\d{4}$/.test(parts[0])) {
+  if (parts.length === 1 && /^\d{6}$/.test(parts[0])) {
+    // /b/YYMMDD
+    const year = '20' + parts[0].slice(0, 2);
+    const month = parts[0].slice(2, 4);
+    const day = parts[0].slice(4, 6);
+    const y = parseInt(year, 10);
+    const m = parseInt(month, 10);
+    const d = parseInt(day, 10);
+    if (y < 2020 || y > 2099 || m < 1 || m > 12 || d < 1 || d > 31) {
+      return NextResponse.next();
+    }
+    destination = `https://jarema.me/blog/${year}/${month}/${day}/`;
+  } else if (parts.length === 2 && /^\d{4}$/.test(parts[0])) {
     // /b/YYMM/slug
     const year = '20' + parts[0].slice(0, 2);
     const month = parts[0].slice(2, 4);
