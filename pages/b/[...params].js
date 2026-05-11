@@ -2,29 +2,12 @@
 // Formats:
 //   /b/YYMM/slug -> https://jarema.me/blog/20YY/MM/slug/
 //   /b/slug      -> https://jarema.me/blog/slug/
-// Examples:
-//   jar.tf/b/2604/welcome-home-astro -> jarema.me/blog/2026/04/welcome-home-astro/
-//   jar.tf/b/hello-world             -> jarema.me/blog/hello-world/
 
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
-
-// Scrape <meta property|name="PROP" content="..."> tag
-function scrapeMeta(html, property) {
-  const tagRe = /<meta\s[^>]+>/gi;
-  let tag;
-  while ((tag = tagRe.exec(html)) !== null) {
-    const t = tag[0];
-    if (new RegExp(`(?:property|name)=["']${property}["']`, 'i').test(t)) {
-      const cm = t.match(/content="([^"]*)"/i) || t.match(/content='([^']*)'/i);
-      if (cm) return cm[1];
-    }
-  }
-  return null;
-}
 
 export async function getServerSideProps({ params }) {
   const parts = params.params ?? [];
-
   let destination;
 
   if (parts.length === 2 && /^\d{4}$/.test(parts[0])) {
@@ -46,27 +29,23 @@ export async function getServerSideProps({ params }) {
     return { notFound: true };
   }
 
-  // Fetch OG tags from the target blog post
-  let og = { title: null, description: null, image: null };
-  try {
-    const res = await fetch(destination, {
-      headers: { 'User-Agent': 'jar.tf/shortlink-bot' },
-      signal: AbortSignal.timeout(3000),
-    });
-    if (res.ok) {
-      const text = await res.text();
-      const head = text.slice(0, text.toLowerCase().indexOf('</head>') + 7);
-
-      og.title = scrapeMeta(head, 'og:title') ?? scrapeMeta(head, 'twitter:title');
-      og.description = scrapeMeta(head, 'og:description') ?? scrapeMeta(head, 'twitter:description') ?? scrapeMeta(head, 'description');
-      og.image = scrapeMeta(head, 'og:image') ?? scrapeMeta(head, 'twitter:image');
-    }
-  } catch { }
-
-  return { props: { destination, og } };
+  return { props: { destination } };
 }
 
-export default function BlogShortlink({ destination, og }) {
+export default function BlogShortlink({ destination }) {
+  const [og, setOg] = useState({ title: null, description: null, image: null });
+
+  useEffect(() => {
+    fetch(`/api/og?url=${encodeURIComponent(destination)}`)
+      .then(r => r.json())
+      .then(data => {
+        setOg(data);
+        // Brief pause so the updated OG tags land in the DOM before redirect
+        setTimeout(() => window.location.replace(destination), 100);
+      })
+      .catch(() => window.location.replace(destination));
+  }, [destination]);
+
   const title = og.title ?? 'jarema.me blog';
   const description = og.description ?? '';
   const image = og.image ?? 'https://jarema.me/favicon.png';
@@ -90,12 +69,6 @@ export default function BlogShortlink({ destination, og }) {
         <meta httpEquiv="refresh" content={`0; url=${destination}`} />
         <link rel="canonical" href={destination} />
       </Head>
-
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `window.location.replace(${JSON.stringify(destination)});`,
-        }}
-      />
     </>
   );
 }
