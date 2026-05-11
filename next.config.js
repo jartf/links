@@ -112,7 +112,7 @@ const nextConfig = {
       },
       {
         // Blog
-        source: '/(blog|b)',
+        source: '/(blog)',
         destination: 'https://jarema.me/blog',
         permanent: false,
       },
