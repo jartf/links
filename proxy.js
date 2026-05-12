@@ -38,11 +38,14 @@ export function proxy(request) {
 
     if (/^\d{6}$/.test(p)) {
       // /b/YYMMDD
-      const y = 2000 + +p.slice(0, 2);
-      const m = +p.slice(2, 4);
-      const d = +p.slice(4, 6);
+      const yy = p.slice(0, 2);
+      const mm = p.slice(2, 4);
+      const dd = p.slice(4, 6);
+      const y = 2000 + +yy;
+      const m = +mm;
+      const d = +dd;
       if (y < 2000 || y > 2099 || m < 1 || m > 12 || d < 1 || d > 31) return NextResponse.next();
-      dest = `https://jarema.me/blog/20${p.slice(0, 2)}/${p.slice(2, 4)}/${p.slice(4, 6)}/`;
+      dest = `https://jarema.me/blog/20${yy}/${mm}/${dd}/`;
 
     } else if (p.length === 6 && /^[0-9a-z]{6}$/i.test(p)) {
       // /b/AAATTT
@@ -56,10 +59,12 @@ export function proxy(request) {
 
   } else if (parts.length === 2 && /^\d{4}$/.test(parts[0])) {
     // /b/YYMM/slug
-    const y = 2000 + +parts[0].slice(0, 2);
-    const m = +parts[0].slice(2, 4);
+    const yy = parts[0].slice(0, 2);
+    const mm = parts[0].slice(2, 4);
+    const y = 2000 + +yy;
+    const m = +mm;
     if (y < 2000 || y > 2099 || m < 1 || m > 12 || !parts[1]) return NextResponse.next();
-    dest = `https://jarema.me/blog/20${parts[0].slice(0, 2)}/${parts[0].slice(2, 4)}/${parts[1]}/`;
+    dest = `https://jarema.me/blog/20${yy}/${mm}/${parts[1]}/`;
 
   } else {
     return NextResponse.next();
