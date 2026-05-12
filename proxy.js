@@ -13,63 +13,38 @@ import { NextResponse } from 'next/server';
 
 const epoch = 10957; // 2000-01-01, in days since Unix epoch
 
-function decodePermashortlink(code) {
-  const a = parseInt(code.slice(0, 3), 36);
-  const t = parseInt(code.slice(3, 6), 36);
-  if (a > 36524 || t >= 1440) return null;
-
-  const date = new Date((epoch + a) * 86400000);
-  const year = date.getUTCFullYear();
-  const month = String(date.getUTCMonth() + 1).padStart(2, '0');
-  const day = String(date.getUTCDate()).padStart(2, '0');
-  const hh = String(Math.floor(t / 60)).padStart(2, '0');
-  const mm = String(t % 60).padStart(2, '0');
-
-  return `https://jarema.me/blog/${year}/${month}/${day}/${hh}/${mm}/`;
-}
-
 export function proxy(request) {
-  const { pathname } = request.nextUrl;
-  const parts = pathname.slice(3).split('/').filter(Boolean);
+  const path = request.nextUrl.pathname.slice(3);
+  const p = path.endsWith('/') ? path.slice(0, -1) : path;
+  if (!p) return NextResponse.next();
   let dest;
+  let match;
 
-  if (parts.length === 1) {
-    const p = parts[0];
+  // /b/YYMMDD
+  if ((match = /^(\d{2})(\d{2})(\d{2})$/.exec(p))) {
+    if (+match[2] < 1 || +match[2] > 12 || +match[3] < 1 || +match[3] > 31) return NextResponse.next();
+    dest = `https://jarema.me/blog/20${match[1]}/${match[2]}/${match[3]}/`;
 
-    if (/^\d{6}$/.test(p)) {
-      // /b/YYMMDD
-      const yy = p.slice(0, 2);
-      const mm = p.slice(2, 4);
-      const dd = p.slice(4, 6);
-      const y = 2000 + +yy;
-      const m = +mm;
-      const d = +dd;
-      if (y < 2000 || y > 2099 || m < 1 || m > 12 || d < 1 || d > 31) return NextResponse.next();
-      dest = `https://jarema.me/blog/20${yy}/${mm}/${dd}/`;
+    // /b/AAATTT
+  } else if ((match = /^([0-9a-z]{3})([0-9a-z]{3})$/i.exec(p))) {
+    const a = parseInt(match[1], 36);
+    const t = parseInt(match[2], 36);
+    if (a > 36524 || t >= 1440) return NextResponse.next();
+    const iso = new Date((epoch + a) * 86400000 + t * 60000).toISOString();
+    dest = `https://jarema.me/blog/${iso.slice(0, 4)}/${iso.slice(5, 7)}/${iso.slice(8, 10)}/${iso.slice(11, 13)}/${iso.slice(14, 16)}/`;
 
-    } else if (p.length === 6 && /^[0-9a-z]{6}$/i.test(p)) {
-      // /b/AAATTT
-      dest = decodePermashortlink(p.toLowerCase());
-      if (!dest) return NextResponse.next();
-
-    } else {
-      // /b/slug
-      dest = `https://jarema.me/blog/${p}/`;
-    }
-
-  } else if (parts.length === 2 && /^\d{4}$/.test(parts[0])) {
     // /b/YYMM/slug
-    const yy = parts[0].slice(0, 2);
-    const mm = parts[0].slice(2, 4);
-    const y = 2000 + +yy;
-    const m = +mm;
-    if (y < 2000 || y > 2099 || m < 1 || m > 12 || !parts[1]) return NextResponse.next();
-    dest = `https://jarema.me/blog/20${yy}/${mm}/${parts[1]}/`;
+  } else if ((match = /^(\d{2})(\d{2})\/([^/]+)$/.exec(p))) {
+    if (+match[2] < 1 || +match[2] > 12) return NextResponse.next();
+    dest = `https://jarema.me/blog/20${match[1]}/${match[2]}/${match[3]}/`;
+
+    // /b/slug
+  } else if (/^[^/]+$/.test(p)) {
+    dest = `https://jarema.me/blog/${p}/`;
 
   } else {
     return NextResponse.next();
   }
-
   return NextResponse.redirect(dest, 302);
 }
 
