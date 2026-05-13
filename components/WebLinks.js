@@ -78,7 +78,7 @@ const Links = () => {
                   height={90}
                   width={90}
                   className={avatarShape}
-                  priority
+                  fetchPriority="high"
                 />
               </AvatarWrap>
             </Avatar>
