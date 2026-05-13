@@ -1,6 +1,5 @@
 // Weblinks Page Sections
-// originally created by @realvjy, modified by @jartf_ to better fit my site
-// date: 31 Jul, 2024
+// date: 13 May, 2026
 
 import Image from "next/image";
 import styled from "styled-components";
@@ -14,17 +13,10 @@ import bioData from "../data/BioData";
 
 const Links = () => {
   // all user info from bioData
-  const name = bioData[0].name;
-  const url = bioData[0].url;
-  const username = bioData[0].username;
-  const avatarImg = bioData[0].avatar;
-  const description = bioData[0].description;
-  const descShow = bioData[0].descShow;
-  const subdesc = bioData[0].subdesc;
-  const subdescShow = bioData[0].subdescShow;
-  const footerText = bioData[0].footerText;
-  const author = bioData[0].author;
-  const authorURL = bioData[0].authorURL;
+  const {
+    name, url, username, avatar: avatarImg, description, descShow, subdesc,
+    subdescShow, footerText, author, authorURL, newProduct, newProductUrl
+  } = bioData[0];
   const avatarShape = `oval-clipped`;
 
   // Description and subdescription goes here
@@ -35,34 +27,54 @@ const Links = () => {
     ? subdesc
     : `Write your own if you want or just remove me/leave blank`;
 
-  const newProduct = bioData[0].newProduct; // checking for newProduct flag true false
-  const newProductUrl = bioData[0].newProductUrl; // get product url if available
+  // Collect all links filter by type
+  const top = [];
+  const web = [];
+  const friends = [];
+  const social = [];
+  const others = [];
 
-  // Collect all links filter by type - social, project and other etc=
-  // get data for top bar
-  const top = allLinks.filter((el) => {
-    return el.type === "top" && el.on;
+  allLinks.forEach((el) => {
+    if (el.on) {
+      switch (el.type) {
+        case "top":
+          top.push(el);
+          break;
+        case "web":
+          web.push(el);
+          break;
+        case "tools for friends":
+          friends.push(el);
+          break;
+        case "social":
+          social.push(el);
+          break;
+        case "other":
+          others.push(el);
+          break;
+      }
+    }
   });
 
-  // Get data for web section
-  const web = allLinks.filter((el) => {
-    return el.type === "web" && el.on;
-  });
-
-  // Get data for tools
-  const friends = allLinks.filter((el) => {
-    return el.type === "tools for friends" && el.on;
-  });
-
-  // Get data for social section
-  const social = allLinks.filter((el) => {
-    return el.type === "social" && el.on;
-  });
-
-  // Get data for other section
-  const others = allLinks.filter((el) => {
-    return el.type === "other" && el.on;
-  });
+  const generateLinks = (links) => {
+    return links.map((i) => (
+      <a href={i.url} key={i.title} target="_blank" rel="noreferrer">
+        <LinkBox>
+          <LinkTitle>
+            <Image
+              width={20}
+              height={0}
+              src={i.icon}
+              alt=""
+              style={{ height: "auto", filter: i.noInvert ? "none" : "var(--img)" }}
+            />{" "}
+            {i.title}
+          </LinkTitle>{" "}
+          <NewUp />
+        </LinkBox>
+      </a>
+    ));
+  };
 
   return (
     <LinkWrapper>
@@ -95,12 +107,10 @@ const Links = () => {
               {/* If you remove username from data, it will not appear */}
               <h2></h2>
               {/* Only adding because PageSpeed Insights won't stop complaining about incorrect order, like nO PLEASE, I intend it to be like this */}
-              {username ? (
+              {username && (
                 <h3>
                   <a href={`${url}`}>{username}</a>
                 </h3>
-              ) : (
-                ""
               )}
             </Title>
           </LinkHeader>
@@ -115,182 +125,74 @@ const Links = () => {
           {/* Weblinks started */}
           <WebLinkWrap>
             {/* Social Icon */}
-            <LinkSection className="top">
-              <div className="iconsonly">
-                {top.map((i) => {
-                  return (
-                    <a
-                      href={i.url}
-                      key={i.title}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
+            {top.length > 0 && (
+              <LinkSection className="top">
+                <div className="iconsonly">
+                  {/* Thanks StackOverflow for the auto height suggestion lol */}
+                  {top.map((i) => (
+                    <a href={i.url} key={i.title} target="_blank" rel="noreferrer">
                       <LinkBox className="socialIcon">
                         <Image
                           width={26}
                           height={0}
                           src={i.icon}
                           alt={i.title}
-                          style={{ height: 'auto', filter: i.noInvert ? "none" : "var(--img)" }}
-                        // Thanks StackOverflow for the auto height suggestion lol
+                          style={{
+                            height: "auto",
+                            filter: i.noInvert ? "none" : "var(--img)",
+                          }}
                         />
                       </LinkBox>
                     </a>
-                  );
-                })}
-              </div>
-            </LinkSection>
+                  ))}
+                </div>
+              </LinkSection>
+            )}
             {/* Social Icon */}
 
             {/* Web Section */}
-            {web.length > 0 ? (
+            {web.length > 0 && (
               <LinkSection>
                 <h3>{web[0].type}</h3>
-                {web.map((i) => {
-                  return (
-                    <a
-                      href={i.url}
-                      key={i.title}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <LinkBox>
-                        <LinkTitle>
-                          <Image
-                            width={20}
-                            height={0}
-                            src={i.icon}
-                            alt=""
-                            style={{ height: 'auto', filter: i.noInvert ? "none" : "var(--img)" }}
-                          />
-                          {" "}
-                          {i.title}
-                        </LinkTitle>{" "}
-                        <NewUp />
-                      </LinkBox>
-                    </a>
-                  );
-                })}
+                {generateLinks(web)}
               </LinkSection>
-            ) : (
-              ""
             )}
             {/* End Web Section */}
 
             {/* Tools Section */}
-            {friends.length > 0 ? (
+            {friends.length > 0 && (
               <LinkSection>
                 <h3>{friends[0].type}</h3>
-                {friends.map((i) => {
-                  return (
-                    <a
-                      href={i.url}
-                      key={i.title}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <LinkBox>
-                        <LinkTitle>
-                          <Image
-                            width={20}
-                            height={0}
-                            src={i.icon}
-                            alt=""
-                            style={{ height: 'auto', filter: i.noInvert ? "none" : "var(--img)" }}
-                          />
-                          {" "}
-                          {i.title}
-                        </LinkTitle>{" "}
-                        <NewUp />
-                      </LinkBox>
-                    </a>
-                  );
-                })}
+                {generateLinks(friends)}
               </LinkSection>
-            ) : (
-              ""
             )}
             {/* End Tools Section */}
 
             {/* Social Section */}
-            {social.length > 0 ? (
+            {social.length > 0 && (
               <LinkSection>
                 <h3>{social[0].type}</h3>
-                {social.map((i) => {
-                  return (
-                    <a
-                      href={i.url}
-                      key={i.title}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <LinkBox>
-                        <LinkTitle>
-                          <Image
-                            width={20}
-                            height={0}
-                            src={i.icon}
-                            alt=""
-                            style={{ height: 'auto', filter: i.noInvert ? "none" : "var(--img)" }}
-                          />
-                          {" "}
-                          {i.title}
-                        </LinkTitle>{" "}
-                        <NewUp />
-                      </LinkBox>
-                    </a>
-                  );
-                })}
+                {generateLinks(social)}
               </LinkSection>
-            ) : (
-              ""
             )}
             {/* End Social Section */}
 
             {/* Other Section */}
-            {others.length > 0 ? (
+            {others.length > 0 && (
               <LinkSection>
                 <h3>{others[0].type}</h3>
                 {/* BioData.js > newProduct == true */}
                 {/* New Section will render once newProduct == true */}
-                {newProduct ? (
+                {newProduct && (
                   <NewSection>
                     <a href={newProductUrl} target="_blank" rel="noreferrer">
-                      <img src={"/newproduct.png"} className="newproduct" />
+                      <img src={"/newproduct.png"} className="newproduct" alt="New Product" />
                     </a>
                   </NewSection>
-                ) : (
-                  ""
                 )}
                 {/* End Biodata.js, You can move this section anywhere */}
-                {others.map((i) => {
-                  return (
-                    <a
-                      href={i.url}
-                      key={i.title}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <LinkBox>
-                        <LinkTitle>
-                          <Image
-                            width={20}
-                            height={0}
-                            src={i.icon}
-                            alt=""
-                            style={{ height: 'auto', filter: i.noInvert ? "none" : "var(--img)" }}
-                          />
-                          {" "}
-                          {i.title}
-                        </LinkTitle>{" "}
-                        <NewUp />
-                      </LinkBox>
-                    </a>
-                  );
-                })}
+                {generateLinks(others)}
               </LinkSection>
-            ) : (
-              ""
             )}
             {/* End Other Section */}
           </WebLinkWrap>
