@@ -1,9 +1,9 @@
 // Handles /b/* blog permashortlinks
 // Formats:
-//   /b/YYMMDD    -> https://jarema.me/blog/20YY/MM/DD/
-//   /b/AAATTT    -> https://jarema.me/blog/20YY/MM/DD/hh/mm/
-//   /b/YYMM/slug -> https://jarema.me/blog/20YY/MM/slug/
-//   /b/slug      -> https://jarema.me/blog/slug/
+//   /b/YYMMDDHHMM -> https://jarema.me/blog/20YY/MM/DD/hh/mm/
+//   /b/AAATTT     -> https://jarema.me/blog/20YY/MM/DD/hh/mm/
+//   /b/YYMM/slug  -> https://jarema.me/blog/20YY/MM/slug/
+//   /b/slug       -> https://jarema.me/blog/slug/
 //
 // Algorithmic permashortlink (base36, case-insensitive):
 //   AAA = base36 dAys since 2000-01-01, covers 2000-2099
@@ -20,10 +20,10 @@ export function proxy(request) {
   let dest;
   let match;
 
-  // /b/YYMMDD
-  if ((match = /^(\d{2})(\d{2})(\d{2})$/.exec(p))) {
-    if (+match[2] < 1 || +match[2] > 12 || +match[3] < 1 || +match[3] > 31) return NextResponse.next();
-    dest = `https://jarema.me/blog/20${match[1]}/${match[2]}/${match[3]}/`;
+  // /b/YYMMDDhhmm
+  if ((match = /^(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})$/.exec(p))) {
+    if (+match[2] < 1 || +match[2] > 12 || +match[3] < 1 || +match[3] > 31 || +match[4] > 23 || +match[5] > 59) return NextResponse.next();
+    dest = `https://jarema.me/blog/20${match[1]}/${match[2]}/${match[3]}/${match[4]}/${match[5]}/`;
 
     // /b/AAATTT
   } else if ((match = /^([0-9a-z]{3})([0-9a-z]{3})$/i.exec(p))) {

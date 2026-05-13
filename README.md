@@ -89,9 +89,9 @@ There are two types of shortlinks:
   - You can configure these in [`data/ShortLinks.js`](./data/ShortLinks.js) and they'll be handled by the catch-all route in [`pages/[...slug].js`](./pages/[...slug].js).
   - Alternatively, you can add them directly in the redirects array of [`next.config.js`](./next.config.js), but it can get messy fast in the long run.
 - A **"permanent" shortlink** (aka a [permashortlink](https://indieweb.org/permashortlink)) is a redirect configured in the Next.js middleware ([`proxy.js`](./proxy.js)). It formats links to point to my blog based on 4 URL patterns, in the following order:
-  - `/b/YYMMDD`: Checks for a 6-digit number in the format of year-month-day, and redirects to `https://jarema.me/blog/20YY/MM/DD/`.
+  - `/b/YYMMDDHHMM`: Checks for a 10-digit number in the format of year-month-day-hour-minute, and redirects to `https://jarema.me/blog/20YY/MM/DD/hh/mm/`.
   - `/b/AAATTT`: This is an algorithmic shortlink with 6 alphanumeric characters, encoded in [Base36](https://en.wikipedia.org/wiki/Base36) to point to a blog datetime.
-    - `AAA` = Base36 days since 2000-01-01, covers dates from 2000 to end of 2099. This contains one letter parsing check to avoid colliding with `/b/YYMMDD`.
+    - `AAA` = Base36 days since 2000-01-01, covers dates from 2000 to end of 2099.
     - `TTT` = Base36 minutes since midnight, range 0-1439.
     - **Example**: [`https://jar.tf/b/7eb0nr`](https://jar.tf/b/7eb0nr) decodes to `https://jarema.me/blog/2026/04/01/14/15/` (case-insensitive). Try it out, I've hyperlinked that one shortlink :3
   - `/b/YYMM/slug`: Extracts the date and slug, and redirects to `https://jarema.me/blog/20YY/MM/slug/`.
