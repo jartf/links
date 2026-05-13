@@ -52,7 +52,7 @@ const nextConfig = {
               default-src 'none';
               connect-src 'self' api-gateway.umami.dev cloud.umami.is;
               img-src 'self';
-              script-src 'self' 'sha256-RlhVC6WGhVrcsY0hAmbU/YhaSUz2iA2q1f16/7A6jLU=' 'sha256-cd+HpnSsLaEz1lKWBNn+k+xOe1m2p5ZgfjoyNvHy9eU=' 'sha256-v02Xi6tc4gTft1Z2IHGBjcCvwkmIABD6UiWsQxrqT5I=' 'sha256-M77mQ4yGK43H2P6FrU8U/1o3n4fpLD9r3xHf1Va0n4g=' ${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ""};
+              script-src 'self' 'sha256-RlhVC6WGhVrcsY0hAmbU/YhaSUz2iA2q1f16/7A6jLU=' 'sha256-cd+HpnSsLaEz1lKWBNn+k+xOe1m2p5ZgfjoyNvHy9eU=' 'sha256-v02Xi6tc4gTft1Z2IHGBjcCvwkmIABD6UiWsQxrqT5I=' 'sha256-pEPR7g1MXXYzMt4x4V6/oMT0FYjuax4cMA2A7XoG2nM=' ${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ""};
               style-src 'self' 'unsafe-inline' fonts.googleapis.com;
               font-src 'self' *.gstatic.com;
               media-src 'self';
