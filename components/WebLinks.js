@@ -3,7 +3,7 @@
 
 import Image from "next/image";
 import styled from "styled-components";
-import { Button, ButtonLink, Container, StyledLink } from "./ReusableStyles";
+import { Container } from "./ReusableStyles";
 import {
   NewUp,
   OvalIcon,

@@ -80,13 +80,6 @@ a{
   
 }
 
-.nft-clipped{
-  clip-path: url(#hex);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
 
 .oval-clipped{
   clip-path: url(#oval);
