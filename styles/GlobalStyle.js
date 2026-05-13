@@ -4,11 +4,57 @@ const GlobalStyle = createGlobalStyle`
 html.dark {
   --img: invert(1);
   --avatar-shadow: rgba(28,22,47,.3);
+  --bg-primary: var(--black);
+  --bg-secondary: var(--light-white);
+  --bg-tertiary: rgba(255,255,255,0.03);
+  --bg-border: #EAEAEA;
+  --bg-inset: #111111;
+  --bg-input: rgba(191,193,201,0.12);
+  --bg-hover: linear-gradient(270deg, #131628 0%, #27141C 100%);
+  --text-primary: var(--white20);
+  --text-secondary: rgba(255,255,255,0.3);
+  --text-tertiary: #a9abb6;
+  --text-quarternary: #6c6f7e;
+  --text-placeholder: rgba(145,148,161,0.5);
+  --text-onPrimary: #050505;
 }
 
-html.light {
+html, html.light {
   --img: invert(0);
   --avatar-shadow: rgba(48,52,77,.1);
+  --bg-primary: var(--white);
+  --bg-secondary: var(--light-black);
+  --bg-tertiary: rgba(0,0,0,0.03);
+  --bg-border: #EAEAEA;
+  --bg-inset: #e2e4e8;
+  --bg-input: rgba(65,67,78,0.12);
+  --bg-hover: linear-gradient(270deg, #FFF7FB 0%, #F4F8FF 100%);
+  --text-primary: var(--black);
+  --text-secondary: rgba(0,0,0,0.5);
+  --text-tertiary: #646464;
+  --text-quarternary: #9194a1;
+  --text-placeholder: rgba(82,85,96,0.5);
+  --text-onPrimary: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not(.light) {
+    --img: invert(1);
+    --avatar-shadow: rgba(28,22,47,.3);
+    --bg-primary: var(--black);
+    --bg-secondary: var(--light-white);
+    --bg-tertiary: rgba(255,255,255,0.03);
+    --bg-border: #EAEAEA;
+    --bg-inset: #111111;
+    --bg-input: rgba(191,193,201,0.12);
+    --bg-hover: linear-gradient(270deg, #131628 0%, #27141C 100%);
+    --text-primary: var(--white20);
+    --text-secondary: rgba(255,255,255,0.3);
+    --text-tertiary: #a9abb6;
+    --text-quarternary: #6c6f7e;
+    --text-placeholder: rgba(145,148,161,0.5);
+    --text-onPrimary: #050505;
+  }
 }
 
 * {
