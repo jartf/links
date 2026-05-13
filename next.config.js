@@ -81,6 +81,10 @@ const nextConfig = {
             value: 'max-age=31536000; includeSubDomains'
           },
           {
+            key: 'Origin-Agent-Cluster',
+            value: '?1'
+          },
+          {
             key: 'Server',
             value: 'Jarema'
           },
