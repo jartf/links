@@ -28,33 +28,19 @@ const Links = () => {
     : `Write your own if you want or just remove me/leave blank`;
 
   // Collect all links filter by type
-  const top = [];
-  const web = [];
-  const friends = [];
-  const social = [];
-  const others = [];
-
-  allLinks.forEach((el) => {
-    if (el.on) {
-      switch (el.type) {
-        case "top":
-          top.push(el);
-          break;
-        case "web":
-          web.push(el);
-          break;
-        case "tools for friends":
-          friends.push(el);
-          break;
-        case "social":
-          social.push(el);
-          break;
-        case "other":
-          others.push(el);
-          break;
-      }
+  const linksByType = allLinks.reduce((acc, link) => {
+    if (link.on) {
+      if (!acc[link.type]) acc[link.type] = [];
+      acc[link.type].push(link);
     }
-  });
+    return acc;
+  }, {});
+
+  const top = linksByType["top"] || [];
+  const web = linksByType["web"] || [];
+  const friends = linksByType["tools for friends"] || [];
+  const social = linksByType["social"] || [];
+  const others = linksByType["other"] || [];
 
   const generateLinks = (links) => {
     return links.map((i) => (
@@ -63,7 +49,7 @@ const Links = () => {
           <LinkTitle>
             <Image
               width={20}
-              height={0}
+              height={20}
               src={i.icon}
               alt=""
               style={{ height: "auto", filter: i.noInvert ? "none" : "var(--img)" }}
@@ -92,6 +78,7 @@ const Links = () => {
                   height={90}
                   width={90}
                   className={avatarShape}
+                  priority
                 />
               </AvatarWrap>
             </Avatar>
@@ -134,7 +121,7 @@ const Links = () => {
                       <LinkBox className="socialIcon">
                         <Image
                           width={26}
-                          height={0}
+                          height={26}
                           src={i.icon}
                           alt={i.title}
                           style={{
@@ -186,7 +173,14 @@ const Links = () => {
                 {newProduct && (
                   <NewSection>
                     <a href={newProductUrl} target="_blank" rel="noreferrer">
-                      <img src={"/newproduct.png"} className="newproduct" alt="New Product" />
+                      <Image
+                        src={"/newproduct.png"}
+                        alt="New Product"
+                        width={400}
+                        height={100}
+                        style={{ width: "100%", height: "auto" }}
+                        className="newproduct"
+                      />
                     </a>
                   </NewSection>
                 )}
