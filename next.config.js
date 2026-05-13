@@ -1,15 +1,3 @@
-const cspHeader = `
-    default-src 'none';
-    connect-src 'self' api-gateway.umami.dev cloud.umami.is;
-    img-src 'self';
-    script-src 'self' 'sha256-RlhVC6WGhVrcsY0hAmbU/YhaSUz2iA2q1f16/7A6jLU=' 'sha256-cd+HpnSsLaEz1lKWBNn+k+xOe1m2p5ZgfjoyNvHy9eU=' 'sha256-v02Xi6tc4gTft1Z2IHGBjcCvwkmIABD6UiWsQxrqT5I=' 'sha256-Ci9dM7U4EJ5koykaEIHKxlIIsoTrFULRVPUG01vXyEU='${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ""};
-    style-src 'self' 'unsafe-inline' fonts.googleapis.com;
-    font-src 'self' *.gstatic.com;
-    media-src 'self';
-    base-uri 'self';
-    upgrade-insecure-requests;
-`;
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async headers() {
@@ -60,7 +48,17 @@ const nextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: cspHeader.replace(/\n/g, ''),
+            value: `
+              default-src 'none';
+              connect-src 'self' api-gateway.umami.dev cloud.umami.is;
+              img-src 'self';
+              script-src 'self' 'sha256-RlhVC6WGhVrcsY0hAmbU/YhaSUz2iA2q1f16/7A6jLU=' 'sha256-cd+HpnSsLaEz1lKWBNn+k+xOe1m2p5ZgfjoyNvHy9eU=' 'sha256-v02Xi6tc4gTft1Z2IHGBjcCvwkmIABD6UiWsQxrqT5I=' 'sha256-M77mQ4yGK43H2P6FrU8U/1o3n4fpLD9r3xHf1Va0n4g=' ${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ""};
+              style-src 'self' 'unsafe-inline' fonts.googleapis.com;
+              font-src 'self' *.gstatic.com;
+              media-src 'self';
+              base-uri 'self';
+              upgrade-insecure-requests;
+            `.replace(/\n/g, ''),
           },
           {
             key: 'Cross-Origin-Embedder-Policy',
