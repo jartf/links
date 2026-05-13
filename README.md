@@ -1,8 +1,10 @@
 # Jarema's link-in-bio page
 
-A fast and highly customizable Linktree alternative, built with Next.js. Forked from [vijay verma](https://github.com/realvjy)'s [nxtlnk](https://github.com/realvjy/nxt-lnk) and made my own improvements.
+A fast and highly customizable Linktree alternative, built with Next.js. Forked from [vijay verma](https://github.com/realvjy)'s [nxtlnk](https://github.com/realvjy/nxt-lnk) and made my own improvements. Made sincerely for people who love making their own link-in-bio page.
 
-Made sincerely for people who love making their own link-in-bio page.
+This repository is hosted on [Codeberg](https://codeberg.org/jartf/links) and mirrored on [GitHub](https://github.com/jartf/links) and [GitLab](https://gitlab.com/jartf/links).
+
+See the site in action: [https://jar.tf](https://jar.tf)
 
 ## Features
 
@@ -56,7 +58,7 @@ Ensure you have Node.js and pnpm (preferred, though npm or any other is fine) in
 
 ## Customization
 
-All configurations live in [`data/`](./data/) and root.
+All configurations live in [`data/`](./data/) and root. If you're only changing the profile info and links, these are the only files you'll ever need to touch :D
 
 - **Profile**: [`data/BioData.js`](./data/BioData.js) contains the site's name, avatar, bio text, the whole nine yards of information.
 - **Links**: [`data/LinksData.js`](./data/LinksData.js) contains displayed links. You can assign different link types to organize them into sections. For my configuration, section `top` is the mini top bar right below the site info for social links.
@@ -64,6 +66,8 @@ All configurations live in [`data/`](./data/) and root.
 - **SEO details**: [`next-seo.config.js`](./next-seo.config.js) is the site’s meta tags and OpenGraph objects configuration.
 
 ## Implementation details
+
+If you want to understand how the code works and/or customize it further, here’s a quick overview of the implementation:
 
 ### Layout
 
@@ -110,6 +114,23 @@ The [`next.config.js`](./next.config.js) uses these HTTP security headers to try
   - `X-XSS-Protection` is `0`, not `1; mode=block` because browsers have deprecated the header and now prefer to rely on Content-Security-Policy for XSS protection, and [the old header can cause issues](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-XSS-Protection#security_considerations).
   - `Sec-GPC` (Global Privacy Control) is `1`, not that I track anything but hey, might as well respect it.
   - `Origin-Agent-Cluster` is set to `?1` to enable origin isolation and mitigate memory attacks.
+
+## Contributing
+
+Issues, feature requests, pull requests, or even just comments are all welcome! Feel free to check the [issues page on Codeberg](https://codeberg.org/jartf/links/issues).
+
+### Contributors
+
+Thanks to [vijay verma (@realvjy)](https://github.com/realvjy) for creating the original [nxt-lnk](https://github.com/realvjy/nxt-lnk).
+
+### Dependencies
+
+A huge thanks to the maintainers of the open-source projects this site relies on:
+
+- [Next.js](https://nextjs.org/) & [React](https://react.dev/)
+- [styled-components](https://styled-components.com/)
+- [next-seo](https://github.com/garmeeh/next-seo)
+- [next-themes](https://github.com/pacocoursey/next-themes)
 
 ## License
 
