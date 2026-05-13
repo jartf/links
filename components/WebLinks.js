@@ -283,7 +283,7 @@ const Title = styled.div`
   h3 {
     margin-top: 6px;
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 400;
     letter-spacing: -0.7px;
     color: ${({ theme }) => theme.text.secondary};
     opacity: 0.5;
@@ -315,7 +315,7 @@ const LinkBio = styled.div`
   h1 {
     font-size: 22px;
     line-height: 30px;
-    font-weight: 500;
+    font-weight: 400;
     letter-spacing: -0.6px;
     padding: 0 20px;
     @media screen and (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
@@ -341,7 +341,7 @@ const LinkBio = styled.div`
     letter-spacing: -0.5px;
     margin: 10px 0;
     color: ${({ theme }) => theme.text.secondary};
-    font-weight: 500;
+    font-weight: 400;
     @media screen and (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
       font-size: 15px;
       padding: 0 20px;
@@ -368,7 +368,7 @@ const LinkFoot = styled.div`
     line-height: 32px;
     letter-spacing: -0.2px;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 400;
     @media screen and (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
       font-size: 12px;
     }
@@ -411,8 +411,7 @@ const LinkSection = styled.div`
   }
   h3 {
     font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 4px;
+    text-transform: capitalize;
     margin-bottom: 4px;
     color: ${({ theme }) => theme.text.secondary};
     @media screen and (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
@@ -432,7 +431,7 @@ const LinkBox = styled.div`
   justify-content: space-between;
   cursor: pointer;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.5px;
   position: relative;
   text-align: center;

@@ -2,42 +2,34 @@ import styled from 'styled-components'
 import { useTheme } from 'next-themes'
 
 function ThemeToggle() {
-    const { setTheme, resolvedTheme } = useTheme()
+  const { setTheme, resolvedTheme } = useTheme()
 
-    function handleClick() {
-        setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
-    }
+  function handleClick() {
+    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
+  }
 
-    return (
-        <ToggleButton
-            onClick={handleClick}
-            aria-label="Toggle theme"
-        >
-            <IconImg src="/sun.svg" alt="Switch to light mode" className="theme-icon theme-icon--sun" />
-            <IconImg src="/moon.svg" alt="Switch to dark mode" className="theme-icon theme-icon--moon" />
-        </ToggleButton>
-    )
+  return (
+    <ToggleButton
+      onClick={handleClick}
+      aria-label="Toggle theme"
+    >
+      <IconImg src="/sun.svg" alt="Switch to light mode" className="theme-icon theme-icon--sun" />
+      <IconImg src="/moon.svg" alt="Switch to dark mode" className="theme-icon theme-icon--moon" />
+    </ToggleButton>
+  )
 }
 
 export default function Layout({ children }) {
-    return (
-        <Main>
-            {children}
-            <ThemeToggle />
-        </Main>
-    )
+  return (
+    <Main>
+      {children}
+      <ThemeToggle />
+    </Main>
+  )
 }
 
 const Main = styled.main`
   min-height: 100vh;
-  background: url('/bg.png') no-repeat;
-  background-size: 100%;
-  background-position: -50vh 10%;
-  background-attachment: fixed;
-  @media screen and (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
-    background-size: 250%;
-    background-position: -50vh 30vh;
-   }
 `;
 
 const ToggleButton = styled.button`
