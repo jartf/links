@@ -2,13 +2,13 @@ const cspHeader = `
     default-src 'none';
     connect-src 'self' api-gateway.umami.dev cloud.umami.is;
     img-src 'self';
-    script-src 'self' 'sha256-RlhVC6WGhVrcsY0hAmbU/YhaSUz2iA2q1f16/7A6jLU=' 'sha256-yei5Fza+Eyx4G0smvN0xBqEesIKumz6RSyGsU3FJowI=' 'sha256-Khy5wTpWZsECYkatTfjUzkzDmKI3jdRjRX+5yTts5sM=' 'sha256-cd+HpnSsLaEz1lKWBNn+k+xOe1m2p5ZgfjoyNvHy9eU=';
+    script-src 'self' 'sha256-RlhVC6WGhVrcsY0hAmbU/YhaSUz2iA2q1f16/7A6jLU=' 'sha256-cd+HpnSsLaEz1lKWBNn+k+xOe1m2p5ZgfjoyNvHy9eU=' 'sha256-v02Xi6tc4gTft1Z2IHGBjcCvwkmIABD6UiWsQxrqT5I=' 'sha256-Ci9dM7U4EJ5koykaEIHKxlIIsoTrFULRVPUG01vXyEU='${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ""};
     style-src 'self' 'unsafe-inline' fonts.googleapis.com;
     font-src 'self' *.gstatic.com;
     media-src 'self';
     base-uri 'self';
     upgrade-insecure-requests;
-`
+`;
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
