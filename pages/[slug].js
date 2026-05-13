@@ -1,7 +1,7 @@
 // Custom short codes from ShortLinks.js
 // Priority:
 // 1. next.config.js redirects
-// 2. pages/b/[...params].js
+// 2. proxy.js
 // 3. This file
 // 4. pages/index.js
 
