@@ -1,8 +1,14 @@
+import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useTheme } from 'next-themes'
 
 function ThemeToggle() {
+  const [mounted, setMounted] = useState(false)
   const { setTheme, resolvedTheme } = useTheme()
+
+  useEffect(() => setMounted(true), [])
+
+  if (!mounted) return null
 
   function handleClick() {
     setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
