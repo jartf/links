@@ -29,7 +29,7 @@ const Links = () => {
 
   // Collect all links filter by type
   const linksByType = allLinks.reduce((acc, link) => {
-    if (link.on) {
+    if (link.on !== false) {
       if (!acc[link.type]) acc[link.type] = [];
       acc[link.type].push(link);
     }
