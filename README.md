@@ -97,7 +97,7 @@ There are two types of shortlinks:
   - `/b/YYMM/slug`: Extracts the date and slug, and redirects to `https://jarema.me/blog/20YY/MM/slug/`.
   - `/b/slug`: Redirects to `https://jarema.me/blog/slug/`.
 
-More about the algorithmic shortlink format in an upcoming blog post :D
+More about the algorithmic shortlink format in this blog post: ["I made an algorithmic permashortlink for my blog"](https://jar.tf/b/7fj0hx) :D
 
 ### Security
 
