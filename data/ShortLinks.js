@@ -51,11 +51,14 @@ const shortLinks = {
   "twitter": "https://twitter.com/jarema_me",
   "tw": "https://twitter.com/jarema_me",
 
-  "mastodon": "https://blob.cat/jar",
-  "ms": "https://blob.cat/jar",
+  "mastodon": "https://mas.to/@jarema",
+  "ms": "https://mas.to/@jarema",
 
-  "tootio": "https://blob.cat/jar",
-  "tt": "https://blob.cat/jar",
+  "blobcat": "https://blob.cat/jar",
+  "bc": "https://blob.cat/jar",
+
+  "tootio": "https://toot.io/@jar",
+  "ti": "https://toot.io/@jar",
 
   "telegram": "https://t.me/jaremame",
   "tg": "https://t.me/jaremame",
